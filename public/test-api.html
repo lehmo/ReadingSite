@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>API Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="p-8">
+    <h1 class="text-2xl font-bold mb-4">API Test Page</h1>
+    <button onclick="testApi()" class="px-4 py-2 bg-blue-500 text-white rounded">
+        Test API Endpoints
+    </button>
+    <div id="results" class="mt-4 space-y-4"></div>
+    <script>
+        async function testApi() {
+            const endpoints = ['/api/test', '/api/books'];
+            const results = document.getElementById('results');
+            results.innerHTML = '';
+            
+            for (const endpoint of endpoints) {
+                const resultDiv = document.createElement('div');
+                resultDiv.className = 'p-4 border rounded';
+                resultDiv.innerHTML = `<h3 class="font-bold">Testing ${endpoint}:</h3><div class="mt-2 p-2 bg-gray-100 rounded">Loading...</div>`;
+                results.appendChild(resultDiv);
+                
+                try {
+                    const response = await fetch(endpoint);
+                    const data = await response.json();
+                    resultDiv.innerHTML = `
+                        <h3 class="font-bold">${endpoint}</h3>
+                        <div class="mt-2 p-2 bg-green-50 rounded">
+                            <p><strong>Status:</strong> ${response.status}</p>
+                            <p><strong>Response:</strong></p>
+                            <pre class="text-xs overflow-auto p-2 bg-white border rounded">${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } catch (error) {
+                    resultDiv.innerHTML = `
+                        <h3 class="font-bold text-red-600">${endpoint}</h3>
+                        <div class="mt-2 p-2 bg-red-50 text-red-600 rounded">
+                            <p><strong>Error:</strong> ${error.message}</p>
+                        </div>
+                    `;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

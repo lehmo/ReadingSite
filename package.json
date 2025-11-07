@@ -1,14 +1,8 @@
 {
-  "name": "reading-notes",
+  "name": "reading-site",
   "version": "1.0.0",
-  "description": "A web interface for reading notes from Obsidian",
-  "main": "simple-http-server.js",
-  "scripts": {
-    "start": "node simple-http-server.js",
-    "export": "node export-notes.js",
-    "dev": "node export-notes.js && node simple-http-server.js"
-  },
+  "main": "index.js",
   "dependencies": {
-    "express": "^4.18.2"
+    "@vercel/node": "^3.0.0"
   }
 }

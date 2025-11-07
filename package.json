@@ -1,0 +1,14 @@
+{
+  "name": "reading-notes",
+  "version": "1.0.0",
+  "description": "A web interface for reading notes from Obsidian",
+  "main": "simple-http-server.js",
+  "scripts": {
+    "start": "node simple-http-server.js",
+    "export": "node export-notes.js",
+    "dev": "node export-notes.js && node simple-http-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
